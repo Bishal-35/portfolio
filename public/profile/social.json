@@ -1,0 +1,16 @@
+{
+    "social": [
+        {
+            "network" : "linkedin",
+            "href": "https://www.linkedin.com/in/bishal-karmakar-03629524b/"
+        },
+        {
+            "network" : "github",
+            "href": "https://github.com/Bishal-35"
+        },
+        {
+            "network" : "email",
+            "href": "mailto:karmakarbishal234@gmail.com"
+        }
+    ]
+}

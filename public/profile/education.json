@@ -1,0 +1,22 @@
+{
+    "education":[
+        {
+            "title": "Aug 2022 - Ongoing",
+            "cardTitle": "B.Tech, Computer Science and Engineering",
+            "cardSubtitle":"Central Institute of Technology, Kokrajhar",
+            "cardDetailedText": "CGPA - 8.72"
+        },
+        {
+            "title": "2019 - 2021",
+            "cardTitle": "Intermediate",
+            "cardSubtitle":"Kendriya Vidyalaya, Rangia",
+            "cardDetailedText": "Marks - 95%"
+        },
+        {
+            "title": "2007 - 2019",
+            "cardTitle": "Primary",
+            "cardSubtitle":"Fatima Convent English Medium School, Rangia",
+            "cardDetailedText": "Marks - 91.2%"
+        }
+    ]
+}
