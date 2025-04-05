@@ -4,7 +4,14 @@
      
             "title": "Languages & Databases",
             "items" : [
-     
+                {
+                    "icon": "images/skills/html.png",
+                    "title": "HTML"
+                },
+                {
+                    "icon": "images/skills/css.png",
+                    "title": "CSS"
+                },
                 {
                     "icon": "images/skills/java.png",
                     "title": "Java"
@@ -26,8 +33,12 @@
                     "title": "MySQL"
                 },
                 {
-                    "icon": "images/skills/c-plus-plus.svg",
-                    "title": "C++"
+                    "icon": "images/skills/c.png",
+                    "title": "C"
+                },
+                {
+                    "icon": "images/skills/mongo-db.png",
+                    "title": "MongoDB"
                 }
         ]},
         {
@@ -48,7 +59,12 @@
                 {
                     "icon": "images/skills/typescript.png",
                     "title": "TypeScript"
+                },
+                {
+                    "icon": "images/skills/expo.png",
+                    "title": "EXPO"
                 }
+
             ]
         },
         {
@@ -61,10 +77,6 @@
                 {
                     "icon": "images/skills/git.png",
                     "title": "Git"
-                },
-                {
-                    "icon": "images/skills/docker.png",
-                    "title": "Docker"
                 }
             ]
     }
