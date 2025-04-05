@@ -11,6 +11,8 @@ import FallbackSpinner from './FallbackSpinner';
 const styles = {
   containerStyle: {
     marginBottom: 25,
+    width: '100%',
+    padding: '0 15px',
   },
   showMoreStyle: {
     margin: 25,
@@ -38,8 +40,8 @@ const Projects = (props) => {
       {data
         ? (
           <div className="section-content-container">
-            <Container style={styles.containerStyle}>
-              <Row xs={1} sm={1} md={2} lg={3} className="g-4">
+            <Container style={styles.containerStyle} fluid="md">
+              <Row xs={1} sm={1} md={2} lg={3} className="g-4 justify-content-center">
                 {data.projects?.slice(0, numberOfItems).map((project) => (
                   <Fade key={project.title}>
                     <ProjectCard project={project} />
@@ -47,12 +49,13 @@ const Projects = (props) => {
                 ))}
               </Row>
 
-              {!showMore
+              {!showMore && data.projects?.length > 6
                 && (
                 <Button
                   style={styles.showMoreStyle}
                   variant={theme.bsSecondaryVariant}
                   onClick={() => setShowMore(true)}
+                  className="mt-4"
                 >
                   show more
                 </Button>
