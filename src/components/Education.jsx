@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useContext } from 'react';
-import { Chrono } from 'react-chrono';
-import { Container } from 'react-bootstrap';
+import { Container, Row, Col, Card } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 import Fade from 'react-reveal';
 import { ThemeContext } from 'styled-components';
@@ -13,8 +12,6 @@ function Education(props) {
   const theme = useContext(ThemeContext);
   const { header } = props;
   const [data, setData] = useState(null);
-  const [width, setWidth] = useState('50vw');
-  const [mode, setMode] = useState('VERTICAL_ALTERNATING');
 
   useEffect(() => {
     fetch(endpoints.education, {
@@ -23,20 +20,6 @@ function Education(props) {
       .then((res) => res.json())
       .then((res) => setData(res))
       .catch((err) => err);
-
-    if (window?.innerWidth < 576) {
-      setMode('VERTICAL');
-    }
-
-    if (window?.innerWidth < 576) {
-      setWidth('90vw');
-    } else if (window?.innerWidth >= 576 && window?.innerWidth < 768) {
-      setWidth('90vw');
-    } else if (window?.innerWidth >= 768 && window?.innerWidth < 1024) {
-      setWidth('75vw');
-    } else {
-      setWidth('50vw');
-    }
   }, []);
 
   return (
@@ -44,35 +27,50 @@ function Education(props) {
       <Header title={header} />
       {data ? (
         <Fade>
-          <div style={{ width }} className="section-content-container education-content">
-            <Container className="text-center">
-              <Chrono
-                hideControls
-                allowDynamicUpdate
-                useReadMore={false}
-                items={data.education}
-                cardHeight={250}
-                mode={mode}
-                theme={{
-                  primary: theme.accentColor,
-                  secondary: theme.accentColor,
-                  cardBgColor: theme.chronoTheme.cardBgColor,
-                  cardForeColor: theme.chronoTheme.cardForeColor,
-                  titleColor: theme.chronoTheme.titleColor,
-                }}
-              >
-                <div className="chrono-icons">
-                  {data.education.map((education) => (education.icon ? (
-                    <img
-                      key={education.icon.src}
-                      src={education.icon.src}
-                      alt={education.icon.alt}
-                    />
-                  ) : null))}
-                </div>
-              </Chrono>
-            </Container>
-          </div>
+          <Container className="education-container">
+            <Row className="education-timeline">
+              {data.education.map((education, index) => (
+                <Col xs={12} key={index} className="education-item">
+                  <Card 
+                    className="education-card"
+                    style={{ 
+                      backgroundColor: theme.chronoTheme.cardBgColor,
+                      color: theme.chronoTheme.cardForeColor,
+                      borderLeft: `5px solid ${theme.accentColor}`
+                    }}
+                  >
+                    <Card.Body>
+                      <Row>
+                        <Col md={3} className="education-year">
+                          <div className="education-duration">
+                            {education.title}
+                          </div>
+                        </Col>
+                        <Col md={9} className="education-details">
+                          <h3 className="education-degree">{education.cardTitle}</h3>
+                          <h4 
+                            className="education-school"
+                            style={{ color: theme.educationSchoolColor }}
+                          >
+                            {education.cardSubtitle}
+                          </h4>
+                          <p className="education-description">{education.cardDetailedText}</p>
+                          {education.icon && (
+                            <div className="education-icon">
+                              <img
+                                src={education.icon.src}
+                                alt={education.icon.alt}
+                              />
+                            </div>
+                          )}
+                        </Col>
+                      </Row>
+                    </Card.Body>
+                  </Card>
+                </Col>
+              ))}
+            </Row>
+          </Container>
         </Fade>
       ) : <FallbackSpinner /> }
     </div>

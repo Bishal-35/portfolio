@@ -1,5 +1,6 @@
 export const lightTheme = {
-  background: '#fff',
+  // background: '#EDE8D0',
+  background: 'rgb(177, 187, 162)',
   color: '#121212',
   accentColor: '#3D84C6',
   chronoTheme: {
@@ -8,7 +9,7 @@ export const lightTheme = {
     titleColor: 'black',
   },
   timelineLineColor: '#ccc',
-  cardBackground: '#fff',
+  cardBackground: '#fce8e8',
   cardFooterBackground: '#f7f7f7',
   cardBorderColor: '#00000020',
   navbarTheme: {
@@ -19,6 +20,7 @@ export const lightTheme = {
   bsPrimaryVariant: 'light',
   bsSecondaryVariant: 'dark',
   socialIconBgColor: '#121212',
+  educationSchoolColor: '#000000',
 };
 
 export const darkTheme = {
@@ -42,4 +44,5 @@ export const darkTheme = {
   bsPrimaryVariant: 'dark',
   bsSecondaryVariant: 'light',
   socialIconBgColor: '#fefefe',
+  educationSchoolColor: '#ffffff',
 };

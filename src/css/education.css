@@ -1,123 +1,168 @@
-.vertical {
-    justify-content: center;
-}
-
-.vertical_alternating {
-    justify-content: center;
-}
-
-@media only screen and (max-width: 578px) {
-    div.vertical-item-row > div:nth-child(1) {
-        width: 20% !important;
-    }
-    div.vertical-item-row > div:nth-child(2) {
-        width: 65% !important;
-    }
-    div.vertical-item-row > div:nth-child(3) {
-        width: 15% !important;
-    }
-}
-
 .education-wrapper {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  padding: 40px 0;
   width: 100%;
-  padding: 20px 0;
 }
 
-.education-content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
+.education-container {
   max-width: 1200px;
   margin: 0 auto;
 }
 
-.education-row {
-  width: 100%;
+.education-timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  align-items: center; /* Center the items horizontally */
+}
+
+.education-item {
+  transition: all 0.3s ease;
+  width: 80%; /* Reduce width on large screens */
+  max-width: 800px; /* Set maximum width */
+}
+
+.education-item:hover {
+  transform: translateX(10px);
 }
 
 .education-card {
-  height: 100%;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  border-radius: 8px;
+  border: none;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
   overflow: hidden;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  position: relative;
 }
 
 .education-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
 }
 
-.education-title {
-  font-weight: bold;
-  margin-bottom: 10px;
-}
-
-.education-subtitle {
-  font-size: 0.95rem;
+.education-year {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 15px;
+  position: relative;
 }
 
 .education-duration {
-  font-style: italic;
+  font-weight: 600;
+  color: inherit;
+  font-size: 1rem;
+  text-align: center;
+  padding: 10px;
+  background-color: rgba(0, 0, 0, 0.04);
+  border-radius: 8px;
+  width: 100%;
+}
+
+.education-details {
+  padding: 20px 15px;
+}
+
+.education-degree {
+  font-size: 1.4rem;
+  font-weight: 700;
   margin-bottom: 10px;
 }
 
-.education-description {
-  font-size: 0.9rem;
+.education-school {
+  font-size: 1.1rem;
+  font-weight: 500;
+  margin-bottom: 15px;
+  color: rgba(1, 1, 1, 0.7);
 }
 
+.education-description {
+  font-size: 1rem;
+  margin-top: 10px;
+}
+
+.education-icon {
+  position: absolute;
+  bottom: 15px;
+  right: 15px;
+  width: 40px;
+  height: 40px;
+  opacity: 0.6;
+}
+
+.education-icon img {
+  width: 100%;
+  height: auto;
+}
+
+/* Medium screens */
+@media only screen and (max-width: 992px) {
+  .education-item {
+    width: 85%;
+  }
+}
+
+/* Dark mode adjustments will be handled by theme provider */
+
 @media only screen and (max-width: 768px) {
-  .education-card {
-    margin-bottom: 20px;
+  .education-item {
+    width: 90%;
   }
   
-  .education-title {
+  .education-degree {
     font-size: 1.2rem;
   }
   
-  .education-subtitle {
+  .education-school {
+    font-size: 1rem;
+  }
+  
+  .education-duration {
+    font-size: 1rem;
+  }
+  
+  .education-description {
+    font-size: 0.9rem;
+  }
+}
+
+@media only screen and (max-width: 576px) {
+  .education-timeline {
+    gap: 15px;
+  }
+  
+  .education-item {
+    width: 95%;
+  }
+  
+  .education-card .row {
+    flex-direction: column;
+  }
+  
+  .education-year, 
+  .education-details {
+    width: 100%;
+    max-width: 100%;
+    flex: 0 0 100%;
+  }
+  
+  .education-year {
+    padding-bottom: 5px;
+  }
+  
+  .education-duration {
+    font-size: 0.9rem;
+    padding: 8px;
+  }
+  
+  .education-degree {
+    font-size: 1.1rem;
+    margin-top: 10px;
+  }
+  
+  .education-school {
     font-size: 0.9rem;
   }
   
   .education-description {
     font-size: 0.85rem;
   }
-}
-
-@media only screen and (max-width: 576px) {
-  .education-title {
-    font-size: 1.1rem;
-  }
-  
-  .education-subtitle {
-    font-size: 0.85rem;
-  }
-  
-  .education-description {
-    font-size: 0.8rem;
-  }
-  
-  .education-card {
-    margin-bottom: 15px;
-  }
-}
-
-/* Make sure the timeline is centered */
-.timeline-main-wrapper {
-  margin: 0 auto;
-}
-
-/* Center the content inside cards */
-.card-text {
-  text-align: center;
-}
-
-/* Center timeline items */
-.timeline-item-title {
-  text-align: center;
 }
