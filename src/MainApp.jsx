@@ -1,9 +1,13 @@
 import React, { useState, useEffect, Suspense } from 'react';
-import { Switch, Route } from 'react-router-dom';
 import FallbackSpinner from './components/FallbackSpinner';
 import NavBarWithRouter from './components/NavBar';
 import Home from './components/Home';
 import endpoints from './constants/endpoints';
+import About from './components/About';
+import Skills from './components/Skills';
+import Education from './components/Education';
+import Experience from './components/Experience';
+import Projects from './components/Projects';
 
 function MainApp() {
   const [data, setData] = useState(null);
@@ -21,24 +25,19 @@ function MainApp() {
     <div className="MainApp">
       <NavBarWithRouter />
       <main className="main">
-        <Switch>
-          <Suspense fallback={<FallbackSpinner />}>
-            <Route exact path="/" component={Home} />
-            {data
-              && data.sections.map((route) => {
-                const SectionComponent = React.lazy(() => import('./components/' + route.component));
-                return (
-                  <Route
-                    key={route.headerTitle}
-                    path={route.path}
-                    component={() => (
-                      <SectionComponent header={route.headerTitle} />
-                    )}
-                  />
-                );
-              })}
-          </Suspense>
-        </Switch>
+        <section id="home">
+          <Home />
+        </section>
+        
+        {data && data.sections.map((section) => (
+          <section key={section.path} id={section.path.substring(1)} className="section">
+            {section.component === 'About' && <About header={section.headerTitle} />}
+            {section.component === 'Skills' && <Skills header={section.headerTitle} />}
+            {section.component === 'Education' && <Education header={section.headerTitle} />}
+            {section.component === 'Experience' && <Experience header={section.headerTitle} />}
+            {section.component === 'Projects' && <Projects header={section.headerTitle} />}
+          </section>
+        ))}
       </main>
     </div>
   );

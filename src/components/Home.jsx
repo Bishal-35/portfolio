@@ -43,17 +43,6 @@ const styles = {
     padding: '6px',
     transform: 'rotate(45deg)',
   },
-  '@keyframes bounce': {
-    '0%, 20%, 50%, 80%, 100%': {
-      transform: 'translateY(0)',
-    },
-    '40%': {
-      transform: 'translateY(-20px)',
-    },
-    '60%': {
-      transform: 'translateY(-10px)',
-    },
-  },
 };
 
 function Home() {
@@ -69,10 +58,13 @@ function Home() {
   }, []);
 
   const handleScrollDown = () => {
-    window.scrollTo({
-      top: window.innerHeight,
-      behavior: 'smooth',
-    });
+    const aboutSection = document.getElementById('about');
+    if (aboutSection) {
+      window.scrollTo({
+        top: aboutSection.offsetTop - 70, // Offset for navbar
+        behavior: 'smooth',
+      });
+    }
   };
 
   useEffect(() => {

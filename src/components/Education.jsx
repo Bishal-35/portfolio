@@ -40,12 +40,12 @@ function Education(props) {
   }, []);
 
   return (
-    <>
+    <div className="education-wrapper">
       <Header title={header} />
       {data ? (
         <Fade>
-          <div style={{ width }} className="section-content-container">
-            <Container>
+          <div style={{ width }} className="section-content-container education-content">
+            <Container className="text-center">
               <Chrono
                 hideControls
                 allowDynamicUpdate
@@ -75,7 +75,7 @@ function Education(props) {
           </div>
         </Fade>
       ) : <FallbackSpinner /> }
-    </>
+    </div>
   );
 }
 

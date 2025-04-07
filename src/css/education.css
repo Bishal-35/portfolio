@@ -17,3 +17,37 @@
         width: 15% !important;
     }
 }
+
+.education-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.education-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+}
+
+.section-content-container.education-content {
+  margin: 0 auto;
+  text-align: center;
+}
+
+/* Make sure the timeline is centered */
+.timeline-main-wrapper {
+  margin: 0 auto;
+}
+
+/* Center the content inside cards */
+.card-text {
+  text-align: center;
+}
+
+/* Center timeline items */
+.timeline-item-title {
+  text-align: center;
+}
