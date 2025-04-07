@@ -10,7 +10,7 @@ import { lightTheme, darkTheme } from './theme/themes';
 
 function App() {
   window.matchMedia = null;
-  const darkMode = useDarkMode(true);
+  const darkMode = useDarkMode(true, { storageKey: null });
 
   return (
     <AppContext.Provider value={{ darkMode }}>
