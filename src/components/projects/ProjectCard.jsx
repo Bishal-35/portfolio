@@ -16,16 +16,31 @@ const styles = {
   },
   cardStyle: {
     borderRadius: 10,
-    height: '100%', // Make cards equal height
+    height: '100%',
     display: 'flex',
     flexDirection: 'column',
+    transition: 'transform 0.3s ease-in-out',
+    width: "420px",
+    width: "100%",
   },
   cardTitleStyle: {
     fontSize: 24,
     fontWeight: 700,
+    height: '60px',
+    overflow: 'hidden',
+    display: '-webkit-box',
+    WebkitLineClamp: 2,
+    WebkitBoxOrient: 'vertical',
+    marginBottom: '15px',
   },
   cardTextStyle: {
     textAlign: 'left',
+    height: '120px',
+    overflow: 'hidden',
+    display: '-webkit-box',
+    WebkitLineClamp: 5,
+    WebkitBoxOrient: 'vertical',
+    marginBottom: '15px',
   },
   linkStyle: {
     textDecoration: 'none',
@@ -35,15 +50,21 @@ const styles = {
     margin: 5,
   },
   cardBodyStyle: {
-    flexGrow: 1, // Allow card body to grow and push footer to bottom
+    flexGrow: 1,
+    display: 'flex',
+    flexDirection: 'column',
   },
   cardImageStyle: {
     objectFit: 'cover',
-    height: '200px', // Consistent image height
+    height: '200px',
+    width: '100%',
   },
   cardFooterStyle: {
     display: 'flex',
-    flexWrap: 'wrap',
+    // flexWrap: 'wrap',
+  },
+  buttonContainer: {
+    marginTop: 'auto',
   },
 };
 
@@ -54,7 +75,7 @@ const ProjectCard = (props) => {
   const { project } = props;
 
   return (
-    <Col className="mb-4">
+    <Col>
       <Card
         style={{
           ...styles.cardStyle,
@@ -62,6 +83,7 @@ const ProjectCard = (props) => {
           borderColor: theme.cardBorderColor,
         }}
         text={theme.bsSecondaryVariant}
+        className="project-card"
       >
         {project?.image && (
           <Card.Img 
@@ -75,21 +97,21 @@ const ProjectCard = (props) => {
           <Card.Text style={styles.cardTextStyle}>
             {parseBodyText(project.bodyText)}
           </Card.Text>
-        </Card.Body>
-
-        <Card.Body>
-          <div className="d-flex flex-wrap">
-            {project?.links?.map((link) => (
-              <Button
-                key={link.href}
-                style={styles.buttonStyle}
-                variant={'outline-' + theme.bsSecondaryVariant}
-                onClick={() => window.open(link.href, '_blank')}
-                className="me-2 mb-2"
-              >
-                {link.text}
-              </Button>
-            ))}
+          
+          <div style={styles.buttonContainer}>
+            <div className="d-flex flex-wrap">
+              {project?.links?.map((link) => (
+                <Button
+                  key={link.href}
+                  style={styles.buttonStyle}
+                  variant={'outline-' + theme.bsSecondaryVariant}
+                  onClick={() => window.open(link.href, '_blank')}
+                  className="me-2 mb-2"
+                >
+                  {link.text}
+                </Button>
+              ))}
+            </div>
           </div>
         </Card.Body>
         {project.tags && (

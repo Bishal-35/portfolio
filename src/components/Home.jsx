@@ -19,6 +19,41 @@ const styles = {
     justifyContent: 'center',
     alignItems: 'center',
   },
+  scrollDown: {
+    position: 'absolute',
+    bottom: 40,
+    left: '50%',
+    transform: 'translateX(-50%)',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+    cursor: 'pointer',
+    animation: 'bounce 2s infinite',
+  },
+  scrollText: {
+    fontSize: '1rem',
+    marginBottom: '10px',
+    color: 'inherit',
+  },
+  arrow: {
+    border: 'solid',
+    borderWidth: '0 3px 3px 0',
+    display: 'inline-block',
+    padding: '6px',
+    transform: 'rotate(45deg)',
+  },
+  '@keyframes bounce': {
+    '0%, 20%, 50%, 80%, 100%': {
+      transform: 'translateY(0)',
+    },
+    '40%': {
+      transform: 'translateY(-20px)',
+    },
+    '60%': {
+      transform: 'translateY(-10px)',
+    },
+  },
 };
 
 function Home() {
@@ -31,6 +66,29 @@ function Home() {
       .then((res) => res.json())
       .then((res) => setData(res))
       .catch((err) => err);
+  }, []);
+
+  const handleScrollDown = () => {
+    window.scrollTo({
+      top: window.innerHeight,
+      behavior: 'smooth',
+    });
+  };
+
+  useEffect(() => {
+    const style = document.createElement('style');
+    style.innerHTML = `
+      @keyframes bounce {
+        0%, 20%, 50%, 80%, 100% { transform: translateY(0) translateX(-50%); }
+        40% { transform: translateY(-20px) translateX(-50%); }
+        60% { transform: translateY(-10px) translateX(-50%); }
+      }
+    `;
+    document.head.appendChild(style);
+    
+    return () => {
+      document.head.removeChild(style);
+    };
   }, []);
 
   return data ? (
@@ -48,6 +106,17 @@ function Home() {
           />
         </div>
         <Social />
+        
+        <div 
+          style={styles.scrollDown}
+          onClick={handleScrollDown}
+          role="button"
+          tabIndex={0}
+          aria-label="Scroll down to see more content"
+        >
+          <span style={styles.scrollText}>Scroll down</span>
+          <i style={styles.arrow}></i>
+        </div>
       </div>
     </Fade>
   ) : <FallbackSpinner />;
