@@ -5,5 +5,37 @@
 @media only screen and (max-width: 768px) {
     .item-title {
         margin-top: 10px !important;
+        font-size: 1.5em !important;
+    }
+    
+    .timeline-mobile {
+        width: 95% !important;
+        margin: 0 auto !important;
+    }
+    
+    .timeline-item-mobile h4,
+    .timeline-item-mobile h5 {
+        font-size: 1rem !important;
+    }
+    
+    .timeline-item-mobile ul {
+        font-size: 0.9rem !important;
+    }
+}
+
+@media only screen and (max-width: 576px) {
+    .item-title {
+        font-size: 1.3em !important;
+    }
+    
+    .timeline-item-mobile h4,
+    .timeline-item-mobile h5 {
+        font-size: 0.9rem !important;
+        display: block !important;
+    }
+    
+    .timeline-item-mobile h5:before {
+        content: '';
+        display: none;
     }
 }

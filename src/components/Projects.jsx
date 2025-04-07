@@ -24,6 +24,7 @@ const Projects = (props) => {
   const { header } = props;
   const [data, setData] = useState(null);
   const [showMore, setShowMore] = useState(false);
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
   useEffect(() => {
     fetch(endpoints.projects, {
@@ -32,8 +33,29 @@ const Projects = (props) => {
       .then((res) => res.json())
       .then((res) => setData(res))
       .catch((err) => err);
+      
+    // Add window resize listener
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+    
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
   }, []);
-  const numberOfItems = showMore && data ? data.length : 6;
+  
+  // Determine grid columns based on screen size
+  const getColumnsPerRow = () => {
+    if (windowWidth < 768) {
+      return 1; // 1 column for small screens
+    } else if (windowWidth < 992) {
+      return 2; // 2 columns for medium screens
+    }
+    return 3; // 3 columns for large screens
+  };
+  
+  const numberOfItems = showMore && data ? data.projects.length : 6;
+  const columnsPerRow = getColumnsPerRow();
+  
   return (
     <>
       <Header title={header} />
@@ -41,7 +63,13 @@ const Projects = (props) => {
         ? (
           <div className="section-content-container">
             <Container style={styles.containerStyle} fluid="md">
-              <Row xs={1} sm={1} md={2} lg={3} className="g-4 justify-content-center equal-height">
+              <Row 
+                xs={1} 
+                sm={columnsPerRow === 1 ? 1 : columnsPerRow} 
+                md={columnsPerRow === 1 ? 1 : columnsPerRow} 
+                lg={columnsPerRow} 
+                className="g-4 justify-content-center equal-height"
+              >
                 {data.projects?.slice(0, numberOfItems).map((project) => (
                   <Fade key={project.title}>
                     <ProjectCard project={project} />

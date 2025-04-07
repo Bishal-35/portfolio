@@ -34,6 +34,7 @@ function Experience(props) {
   const theme = useContext(ThemeContext);
   const { header } = props;
   const [data, setData] = useState(null);
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
   useEffect(() => {
     fetch(endpoints.experiences, {
@@ -42,7 +43,30 @@ function Experience(props) {
       .then((res) => res.json())
       .then((res) => setData(res.experiences))
       .catch((err) => err);
+      
+    // Add window resize listener
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+    
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
   }, []);
+  
+  // Get responsive styles based on window width
+  const getResponsiveStyles = () => {
+    if (windowWidth <= 576) {
+      return {
+        ulStyle: {
+          ...styles.ulStyle,
+          paddingLeft: 15,
+        },
+      };
+    }
+    return styles;
+  };
+  
+  const responsiveStyles = getResponsiveStyles();
 
   return (
     <>
@@ -54,15 +78,16 @@ function Experience(props) {
             <Container>
               <Timeline
                 lineColor={theme.timelineLineColor}
+                className={windowWidth <= 768 ? "timeline-mobile" : ""}
               >
                 {data.map((item) => (
-                  <Fade>
+                  <Fade key={item.title + item.dateText}>
                     <TimelineItem
-                      key={item.title + item.dateText}
                       dateText={item.dateText}
                       dateInnerStyle={{ background: theme.accentColor }}
                       style={styles.itemStyle}
                       bodyContainerStyle={{ color: theme.color }}
+                      className={windowWidth <= 768 ? "timeline-item-mobile" : ""}
                     >
                       <h2 className="item-title">
                         {item.title}
@@ -73,13 +98,11 @@ function Experience(props) {
                         </h4>
                         {item.workType && (
                         <h5 style={styles.inlineChild}>
-                    &nbsp;·
-                          {' '}
-                          {item.workType}
+                          &nbsp;·&nbsp;{item.workType}
                         </h5>
                         )}
                       </div>
-                      <ul style={styles.ulStyle}>
+                      <ul style={responsiveStyles.ulStyle}>
                         {item.workDescription.map((point) => (
                           <div key={point}>
                             <li>

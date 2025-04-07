@@ -18,6 +18,7 @@ const styles = {
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
+    padding: '0 10px',
   },
   scrollDown: {
     position: 'absolute',
@@ -45,8 +46,30 @@ const styles = {
   },
 };
 
+// Media query styles applied with JavaScript
+const getResponsiveStyles = (windowWidth) => {
+  if (windowWidth <= 576) {
+    return {
+      nameStyle: {
+        fontSize: '3em',
+      },
+      scrollText: {
+        fontSize: '0.9rem',
+      },
+    };
+  } else if (windowWidth <= 768) {
+    return {
+      nameStyle: {
+        fontSize: '4em',
+      },
+    };
+  }
+  return {};
+};
+
 function Home() {
   const [data, setData] = useState(null);
+  const [responsiveStyles, setResponsiveStyles] = useState({});
 
   useEffect(() => {
     fetch(endpoints.home, {
@@ -55,6 +78,17 @@ function Home() {
       .then((res) => res.json())
       .then((res) => setData(res))
       .catch((err) => err);
+      
+    // Initial responsive styles based on window width
+    setResponsiveStyles(getResponsiveStyles(window.innerWidth));
+    
+    // Update styles on window resize
+    const handleResize = () => {
+      setResponsiveStyles(getResponsiveStyles(window.innerWidth));
+    };
+    
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
   }, []);
 
   const handleScrollDown = () => {
@@ -83,10 +117,14 @@ function Home() {
     };
   }, []);
 
+  // Merge default and responsive styles
+  const nameStyleResponsive = { ...styles.nameStyle, ...responsiveStyles.nameStyle };
+  const scrollTextResponsive = { ...styles.scrollText, ...responsiveStyles.scrollText };
+
   return data ? (
     <Fade>
       <div style={styles.mainContainer}>
-        <h1 style={styles.nameStyle}>{data?.name}</h1>
+        <h1 style={nameStyleResponsive}>{data?.name}</h1>
         <div style={{ flexDirection: 'row' }}>
           <h2 style={styles.inlineChild}>I&apos;m&nbsp;</h2>
           <Typewriter
@@ -106,7 +144,7 @@ function Home() {
           tabIndex={0}
           aria-label="Scroll down to see more content"
         >
-          <span style={styles.scrollText}>Scroll down</span>
+          <span style={scrollTextResponsive}>Scroll down</span>
           <i style={styles.arrow}></i>
         </div>
       </div>

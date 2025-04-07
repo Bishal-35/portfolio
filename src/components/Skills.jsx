@@ -17,11 +17,16 @@ const styles = {
   introTextContainer: {
     whiteSpace: 'pre-wrap',
   },
+  skillContainer: {
+    display: 'inline-block',
+    textAlign: 'center',
+  },
 };
 
 function Skills(props) {
   const { header } = props;
   const [data, setData] = useState(null);
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
   const renderSkillsIntro = (intro) => (
     <h4 style={styles.introTextContainer}>
@@ -36,7 +41,38 @@ function Skills(props) {
       .then((res) => res.json())
       .then((res) => setData(res))
       .catch((err) => err);
+      
+    // Add window resize listener
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+    
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
   }, []);
+
+  // Responsive styles based on window width
+  const getIconSize = () => {
+    if (windowWidth <= 576) {
+      return {
+        height: 50,
+        width: 50,
+        margin: 5,
+        marginBottom: 0,
+      };
+    }
+    if (windowWidth <= 768) {
+      return {
+        height: 65,
+        width: 65,
+        margin: 8,
+        marginBottom: 0,
+      };
+    }
+    return styles.iconStyle;
+  };
+
+  const iconStyleResponsive = getIconSize();
 
   return (
     <>
@@ -50,16 +86,18 @@ function Skills(props) {
                 <div key={rows.title}>
                   <br />
                   <h3>{rows.title}</h3>
-                  {rows.items.map((item) => (
-                    <div key={item.title} style={{ display: 'inline-block' }}>
-                      <img
-                        style={styles.iconStyle}
-                        src={item.icon}
-                        alt={item.title}
-                      />
-                      <p>{item.title}</p>
-                    </div>
-                  ))}
+                  <div className="d-flex flex-wrap justify-content-center">
+                    {rows.items.map((item) => (
+                      <div key={item.title} style={styles.skillContainer}>
+                        <img
+                          style={iconStyleResponsive}
+                          src={item.icon}
+                          alt={item.title}
+                        />
+                        <p>{item.title}</p>
+                      </div>
+                    ))}
+                  </div>
                 </div>
               ))}
             </Container>

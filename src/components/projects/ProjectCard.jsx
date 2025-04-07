@@ -20,7 +20,6 @@ const styles = {
     display: 'flex',
     flexDirection: 'column',
     transition: 'transform 0.3s ease-in-out',
-    width: "420px",
     width: "100%",
   },
   cardTitleStyle: {
@@ -61,10 +60,32 @@ const styles = {
   },
   cardFooterStyle: {
     display: 'flex',
-    // flexWrap: 'wrap',
+    flexWrap: 'wrap',
   },
   buttonContainer: {
     marginTop: 'auto',
+  },
+};
+
+// Media query styles for smaller screens
+const mediaQueryStyles = {
+  '@media (max-width: 768px)': {
+    cardTitleStyle: {
+      fontSize: '20px',
+      height: '50px',
+    },
+    cardTextStyle: {
+      height: '100px',
+    },
+  },
+  '@media (max-width: 576px)': {
+    cardTitleStyle: {
+      fontSize: '18px',
+      height: '45px',
+    },
+    cardTextStyle: {
+      height: '90px',
+    },
   },
 };
 
