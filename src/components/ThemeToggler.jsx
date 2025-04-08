@@ -1,37 +1,23 @@
-import React from 'react';
-import DarkModeToggle from 'react-dark-mode-toggle';
-import PropTypes from 'prop-types';
+import React, { useContext } from 'react';
 import AppContext from '../AppContext';
 
-function ThemeToggler(props) {
-  const { onClick } = props;
-  const handleOnChange = (darkMode) => {
-    darkMode.toggle();
-    onClick();
-  };
+function ThemeToggler() {
+  const { isDarkMode, toggleDarkMode } = useContext(AppContext);
 
   return (
-    <>
-      <AppContext.Consumer>
-        {(values) => (
-          <div style={{ marginBottom: 8 }}>
-            <DarkModeToggle
-              onChange={() => handleOnChange(values.darkMode)}
-              checked={values.darkMode.value}
-              size={50}
-            />
-          </div>
-        )}
-      </AppContext.Consumer>
-    </>
+    <button
+      onClick={toggleDarkMode}
+      style={{
+        background: isDarkMode ? '#333' : '#fff',
+        color: isDarkMode ? '#fff' : '#333',
+        border: 'none',
+        padding: '10px 20px',
+        cursor: 'pointer',
+      }}
+    >
+      {isDarkMode ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
+    </button>
   );
 }
-
-ThemeToggler.propTypes = {
-  onClick: PropTypes.func,
-};
-ThemeToggler.defaultProps = {
-  onClick: () => {},
-};
 
 export default ThemeToggler;
